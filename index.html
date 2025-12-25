@@ -1,214 +1,182 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Наши тарифы</title>
+<title>Подписки</title>
 <style>
-    body {
-        margin: 0;
-        padding: 40px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-    }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0b0c1a, #1c1c2e);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px;
+}
 
-    .container {
-        width: 420px;
-        background: rgba(20,20,40,0.9);
-        border-radius: 20px;
-        padding: 40px 30px;
-        box-shadow: 0 0 40px #00f0ff33, 0 0 80px #007BFF22;
-        backdrop-filter: blur(5px);
-    }
+/* Контейнер */
+.container {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
-    /* Логотип */
-    .logo {
-        width: 90px;
-        height: 90px;
-        display: block;
-        margin: 0 auto 30px auto;
-        border-radius: 15px;
-        object-fit: cover;
-        box-shadow: 0 0 20px #00f0ff55;
-        transition: transform 0.3s;
-    }
+/* Верхний блок: логотип и кнопка оплаты */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    h2 {
-        text-align: center;
-        font-size: 24px;
-        color: #ccefff;
-        margin-bottom: 30px;
-        text-shadow: 0 0 8px #00f0ff44, 0 0 15px #007BFF33;
-    }
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 0 25px #00f0ff55;
+}
 
-    /* Карточки тарифов */
-    .tariffs {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+.pay-button {
+    padding: 14px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(90deg, #00f0ff, #007BFF);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 5px #00f0ff66;
+}
+.pay-button:disabled {
+    background: #444;
+    cursor: not-allowed;
+    text-shadow: none;
+}
 
-    .tariff {
-        position: relative;
-        padding: 20px;
-        border-radius: 15px;
-        background: linear-gradient(145deg, #1c1c2c, #242447);
-        border: 1px solid #00f0ff33;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    }
+/* Блок тарифов */
+.tariffs {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
 
-    .tariff:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 20px #00f0ff77, 0 0 40px #007BFF33;
-        border-color: #00f0ff66;
-    }
+.tariff {
+    flex: 1;
+    padding: 25px;
+    background: rgba(20,20,40,0.9);
+    border-radius: 20px;
+    border: 1px solid #00f0ff33;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
 
-    .tariff input {
-        display: none;
-    }
+.tariff:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00f0ff88, 0 0 50px #007BFF44;
+    border-color: #00f0ff66;
+}
 
-    .tariff label {
-        font-size: 16px;
-        color: #ccefff;
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        cursor: pointer;
-        text-shadow: 0 0 3px #00f0ff55;
-    }
+.tariff input {
+    display: none;
+}
 
-    .tariff input:checked + label {
-        font-weight: bold;
-        color: #00f0ff;
-    }
+.tariff label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ccefff;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
 
-    .tariff input:checked + label .price {
-        text-shadow: 0 0 8px #00f0ff, 0 0 15px #007BFF;
-    }
+.tariff input:checked + label {
+    color: #00f0ff;
+    text-shadow: 0 0 12px #00f0ff, 0 0 20px #007BFF;
+}
 
-    .price {
-        font-weight: bold;
-        color: #00f0ff;
-    }
+/* Соглашение */
+.agreement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+.agreement a {
+    color: #00f0ff;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
-    /* Соглашение */
-    .agreement {
-        margin-top: 25px;
-        font-size: 14px;
-        color: #ccefff;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .agreement a {
-        color: #00f0ff;
-        text-decoration: underline;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.modal-content {
+    background-color: #111126;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 35px #00f0ff55;
+    animation: fadeIn 0.3s ease;
+}
 
-    .agreement a:hover {
-        text-shadow: 0 0 10px #00f0ff77;
-    }
+.close {
+    color: #00f0ff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    /* Кнопка оплаты */
-    .pay-button {
-        margin-top: 25px;
-        width: 100%;
-        padding: 16px;
-        border: none;
-        border-radius: 15px;
-        background: linear-gradient(90deg, #00f0ff, #007BFF);
-        color: #fff;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-shadow: 0 0 5px #00f0ff66;
-    }
-
-    .pay-button:disabled {
-        background: #444;
-        cursor: not-allowed;
-        text-shadow: none;
-        box-shadow: none;
-    }
-
-    .pay-button:hover:enabled {
-        box-shadow: 0 0 30px #00f0ff88, 0 0 50px #007BFF44;
-    }
-
-    /* Модальное окно оферты */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.85);
-    }
-
-    .modal-content {
-        background-color: #111126;
-        margin: 5% auto;
-        padding: 30px;
-        border-radius: 15px;
-        width: 90%;
-        max-width: 650px;
-        color: #ccefff;
-        text-align: left;
-        box-shadow: 0 0 30px #00f0ff55;
-        max-height: 80vh;
-        overflow-y: auto;
-        animation: fadeIn 0.3s ease;
-    }
-
-    .close {
-        color: #00f0ff;
-        float: right;
-        font-size: 26px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .close:hover {
-        color: #fff;
-    }
-
-    @keyframes fadeIn {
-        from {opacity: 0; transform: scale(0.95);}
-        to {opacity: 1; transform: scale(1);}
-    }
+@keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Используем логотип рядом с HTML -->
-    <img src="logo.png" alt="Логотип" class="logo">
-    <h2>Наши тарифы</h2>
+    <div class="top-bar">
+        <img src="logo.png" alt="Логотип" class="logo">
+        <button class="pay-button" id="payButton" disabled>Оплатить</button>
+    </div>
 
     <div class="tariffs">
         <div class="tariff">
             <input type="radio" id="month" name="tariff" value="30">
-            <label for="month">30 дней — <span class="price">149 ₽</span></label>
+            <label for="month">30 дней — 149 ₽</label>
         </div>
         <div class="tariff">
             <input type="radio" id="sixmonths" name="tariff" value="6">
-            <label for="sixmonths">6 месяцев — <span class="price">799 ₽</span></label>
+            <label for="sixmonths">6 месяцев — 799 ₽</label>
         </div>
         <div class="tariff">
             <input type="radio" id="year" name="tariff" value="12">
-            <label for="year">1 год — <span class="price">1 399 ₽</span></label>
+            <label for="year">1 год — 1 399 ₽</label>
         </div>
     </div>
 
@@ -216,62 +184,44 @@
         <input type="checkbox" id="agree">
         <label for="agree">Я согласен с <a id="openModal">офертой</a></label>
     </div>
-
-    <button class="pay-button" id="payButton" disabled>Оплатить</button>
 </div>
 
-<!-- Модальное окно оферты -->
-<div id="modal" class="modal">
+<div class="modal" id="modal">
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
         <h2>Публичная оферта</h2>
-        <p>
-            Настоящая оферта является официальным предложением вашей компании 
-            о предоставлении платных подписок. Оплата подписки означает полное 
-            согласие с условиями данной оферты.
-        </p>
-        <p>
-            1. Приобретая подписку, пользователь получает доступ к сервису на указанный срок.<br>
-            2. Оплата производится через выбранный способ оплаты.<br>
-            3. Возврат средств возможен только в случае технических сбоев сервиса.<br>
-            4. Компания не несет ответственности за нарушение правил пользования сторонними сервисами.<br>
-            5. Пользователь соглашается с обработкой персональных данных в рамках оказания услуг.
-        </p>
-        <p>Полные условия доступны на сайте компании.</p>
+        <p>Настоящая оферта является официальным предложением вашей компании. Оплата подписки означает полное согласие с условиями данной оферты.</p>
+        <p>1. Пользователь получает доступ к сервису на выбранный срок.<br>
+        2. Оплата производится через выбранный способ.<br>
+        3. Возврат возможен только при сбоях сервиса.<br>
+        4. Компания не несет ответственности за действия сторонних сервисов.<br>
+        5. Пользователь соглашается с обработкой персональных данных.</p>
     </div>
 </div>
 
 <script>
-    const checkbox = document.getElementById('agree');
-    const payButton = document.getElementById('payButton');
-    const tariffs = document.querySelectorAll('.tariff input');
+const checkbox = document.getElementById('agree');
+const payButton = document.getElementById('payButton');
+const tariffs = document.querySelectorAll('.tariff input');
 
-    function updateButton() {
-        const tariffSelected = Array.from(tariffs).some(t => t.checked);
-        payButton.disabled = !(checkbox.checked && tariffSelected);
-    }
+function updateButton() {
+    const selected = Array.from(tariffs).some(t => t.checked);
+    payButton.disabled = !(selected && checkbox.checked);
+}
+checkbox.addEventListener('change', updateButton);
+tariffs.forEach(t => t.addEventListener('change', updateButton));
 
-    checkbox.addEventListener('change', updateButton);
-    tariffs.forEach(t => t.addEventListener('change', updateButton));
+const modal = document.getElementById('modal');
+document.getElementById('openModal').onclick = () => modal.style.display = 'flex';
+document.getElementById('closeModal').onclick = () => modal.style.display = 'none';
+window.onclick = (e) => { if(e.target==modal) modal.style.display='none'; }
 
-    // Модальное окно
-    const modal = document.getElementById('modal');
-    const openModal = document.getElementById('openModal');
-    const closeModal = document.getElementById('closeModal');
-
-    openModal.onclick = () => modal.style.display = 'block';
-    closeModal.onclick = () => modal.style.display = 'none';
-    window.onclick = (event) => { if(event.target == modal) modal.style.display = 'none'; }
-
-    // Эффект увеличения выбранного тарифа
-    tariffs.forEach(input => {
-        input.addEventListener('change', () => {
-            document.querySelectorAll('.tariff').forEach(t => t.style.transform = 'scale(1)');
-            if(input.checked){
-                input.parentElement.style.transform = 'scale(1.05)';
-            }
-        });
+tariffs.forEach(input => {
+    input.addEventListener('change', () => {
+        document.querySelectorAll('.tariff').forEach(t => t.style.transform='scale(1)');
+        if(input.checked) input.parentElement.style.transform='scale(1.07)';
     });
+});
 </script>
 
 </body>
